@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>window.rqa tst</title>
+        <style>
+            body {background: black;}
+
+            .ring {
+                position: fixed;
+                left: 50%;
+                top: 50px;
+                margin-left: -100px;
+                height: 32px;
+                width: 32px;
+                border: 0px solid #777;
+                border-radius: 50%;
+                animation: orbitOne 10s linear infinite;
+            }
+
+            @keyframes orbitOne {
+                0% {transform: rotate(0deg);}
+                100% {transform: rotate(360deg);}
+            }
+
+            .dot {
+                position: absolute;
+                height: 32px;
+                width: 32px;
+                top: 0px;
+                left: 50%;
+                margin-left: -16px;
+            }
+            .dot span {
+                display: block;
+                height: 8px;
+                width: 8px;
+                border-radius: 50%;
+                box-shadow: 0 2px 3px rgba(0,0,0,.1);
+            }
+            .dot.one {-webkit-animation: orbitOne 8s linear infinite;}
+            .dot.one span {background: white;}
+            .dot.two {-webkit-animation: orbitOne 8.2s linear infinite;}
+            .dot.two span {background: white;}
+            .dot.three {-webkit-animation: orbitOne 8.4s linear infinite;}
+            .dot.three span {background: white;}
+            .dot.four {-webkit-animation: orbitOne 8.6s linear infinite;}
+            .dot.four span {background: white;}
+            .dot.five {-webkit-animation: orbitOne 8.8s linear infinite;}
+            .dot.five span {background: white;}
+            .dot.six {-webkit-animation: orbitOne 9s linear infinite;}
+            .dot.six span {background: white;}
+            .dot.seven {-webkit-animation: orbitOne 9.2s linear infinite;}
+            .dot.seven span {background: white;}
+            .dot.eight {-webkit-animation: orbitOne 9.4s linear infinite;}
+            .dot.eight span {background: white;}
+            .dot.nine {-webkit-animation: orbitOne 9.6s linear infinite;}
+            .dot.nine span {background: white;}
+            .dot.ten {-webkit-animation: orbitOne 9.8s linear infinite;}
+            .dot.ten span {background: white;}
+            .dot.eleven {-webkit-animation: orbitOne 10s linear infinite;}
+            .dot.eleven span {background: white;}
+            .dot.twelve {-webkit-animation: orbitOne 10.2s linear infinite;}
+            .dot.twelve span {background: white;}
+            .dot.thirteen {-webkit-animation: orbitOne 10.4s linear infinite;}
+            .dot.thirteen span {background: white;}
+            .dot.fourteen {-webkit-animation: orbitOne 10.6s linear infinite;}
+            .dot.fourteen span {background: white;}
+            .dot.fifteen {-webkit-animation: orbitOne 10.8s linear infinite;}
+            .dot.fifteen span {background: white;}
+        </style>
+    </head>
+    <body>
+        <div class="ring">
+            <div class="dot one"><span></span></div>
+            <div class="dot two"><span></span></div>
+            <div class="dot three"><span></span></div>
+            <div class="dot four"><span></span></div>
+            <div class="dot five"><span></span></div>
+            <div class="dot six"><span></span></div>
+            <div class="dot seven"><span></span></div>
+            <div class="dot eight"><span></span></div>
+            <div class="dot nine"><span></span></div>
+            <div class="dot ten"><span></span></div>
+            <div class="dot eleven"><span></span></div>
+            <div class="dot twelve"><span></span></div>
+            <div class="dot thirteen"><span></span></div>
+            <div class="dot fourteen"><span></span></div>
+            <div class="dot fifteen"><span></span></div>
+        </div>
+    </body>
+</html>
