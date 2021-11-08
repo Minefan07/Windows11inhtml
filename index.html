@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="ICON" href="icons/favicon-s.ico" type="image/ico" />
+        <title>Windows 11 in HTML, JS, and CSS.</title>
+        <style>
+            .all {
+                padding: 0px;
+                margin: 0px;
+                overflow: hidden;
+                vertical-align: middle;
+                text-align: justify;
+                font-family: "Segoe UI", sans-serif; 
+                font-size: 13px; 
+                font-style: normal; 
+                font-variant: normal; 
+                font-weight: 100; 
+                line-height: 15px;
+                text-shadow: 2px 2px 3px black;
+                color: white;
+                user-select: none;
+                cursor: url(cursors/still.png), pointer;
+            }
+
+            .bios {
+                position: fixed;
+                width: 100%;
+                height: 100%;
+                font-family: biosfont;
+                z-index: 10;
+                background: black;
+                cursor: none;
+                font-size: 24px;
+                line-height: 25px;
+                color: lightgray;
+            }
+
+            @font-face {
+                font-family: biosfont;
+                src: url(fonts/Biosfont.ttf);
+            }
+
+            .ring {
+                position: fixed;
+                left: calc(50% - 16px);
+                top: 75%;
+                height: 32px;
+                width: 32px;
+                border: 0px solid #777;
+                border-radius: 50%;
+                animation: orbitOne 10s linear infinite;
+            }
+
+            @keyframes orbitOne {
+                0% {transform: rotate(0deg);}
+                100% {transform: rotate(360deg);}
+            }
+
+            .dot {
+                position: absolute;
+                height: 32px;
+                width: 32px;
+                top: 0px;
+                left: 50%;
+                margin-left: -16px;
+            }
+            .dot span {
+                display: block;
+                height: 8px;
+                width: 8px;
+                border-radius: 50%;
+                box-shadow: 0 2px 3px rgba(0,0,0,.1);
+            }
+            .dot.one {-webkit-animation: orbitOne 4s linear infinite;}
+            .dot.one span {background: white;}
+            .dot.two {-webkit-animation: orbitOne 4.1s linear infinite;}
+            .dot.two span {background: white;}
+            .dot.three {-webkit-animation: orbitOne 4.2s linear infinite;}
+            .dot.three span {background: white;}
+            .dot.four {-webkit-animation: orbitOne 4.3s linear infinite;}
+            .dot.four span {background: white;}
+            .dot.five {-webkit-animation: orbitOne 4.4s linear infinite;}
+            .dot.five span {background: white;}
+            .dot.six {-webkit-animation: orbitOne 4.5s linear infinite;}
+            .dot.six span {background: white;}
+            .dot.seven {-webkit-animation: orbitOne 4.6s linear infinite;}
+            .dot.seven span {background: white;}
+            .dot.eight {-webkit-animation: orbitOne 4.7s linear infinite;}
+            .dot.eight span {background: white;}
+            .dot.nine {-webkit-animation: orbitOne 4.8s linear infinite;}
+            .dot.nine span {background: white;}
+            .dot.ten {-webkit-animation: orbitOne 4.9s linear infinite;}
+            .dot.ten span {background: white;}
+            .dot.eleven {-webkit-animation: orbitOne 5s linear infinite;}
+            .dot.eleven span {background: white;}
+            .dot.twelve {-webkit-animation: orbitOne 5.1s linear infinite;}
+            .dot.twelve span {background: white;}
+            .dot.thirteen {-webkit-animation: orbitOne 5.1s linear infinite;}
+            .dot.thirteen span {background: white;}
+            .dot.fourteen {-webkit-animation: orbitOne 5.2s linear infinite;}
+            .dot.fourteen span {background: white;}
+            .dot.fifteen {-webkit-animation: orbitOne 5.4s linear infinite;}
+            .dot.fifteen span {background: white;}
+
+            .taskbar {
+                position: fixed;
+                bottom: 0px;
+                text-align: center;
+                z-index: 2;
+                height: 40px;
+                width: 100%;
+            }
+
+            .taskbar {
+                background: rgba(255,255,255,0.75);
+            }
+
+            @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+                .taskbar {
+                    -webkit-backdrop-filter: blur(10px);
+                    backdrop-filter: blur(10px);
+                }
+            }
+
+            .background {
+                position: fixed;
+                overflow: hidden;
+                vertical-align: middle;
+                display: inline-block;
+                height: 100%;
+                width: 100%;
+                background-color: #c0d2e6;
+                z-index: 1;
+            }
+
+            .backgroundimg {
+                width: 100%;
+                background: url(background/litebloom.png) no-repeat;
+                vertical-align: middle;
+                z-index: 2;
+            }
+
+            .taskbaricons {
+                position: fixed;
+                height: 40px;
+                left: calc(50% - 100px);
+                z-index: 3;
+                bottom: 0px;
+            }
+
+            .explorericon {
+                height: 24.5px;
+                width: 24.5px;
+                left: 5.25px;
+                bottom: 5.25px;
+                position: absolute;
+            }
+
+            .explorer {
+                z-index: 3;
+                position: fixed;
+                left: calc(50% + 2.5px);
+                bottom: 2.5px;
+                height: 35px;
+                width: 35px;
+                border-radius: 3px;
+                padding-top: 2.5px;
+                text-align: center;
+            }
+
+            .explorer:hover {
+                z-index: 3;
+                position: fixed;
+                left: calc(50% + 2.5px);
+                bottom: 2.5px;
+                height: 35px;
+                width: 35px;
+                background: white;
+                border-radius: 2.5px;
+                padding: 0px;
+                text-align: center;
+                animation: fadeIn 0.3s;
+            }
+
+            .start {
+                height: 24.5px;
+                width: 24.5px;
+                left: 5.25px;
+                bottom: 5.25px;
+                position: absolute;
+            }
+
+            .win {
+                z-index: 3;
+                position: fixed;
+                left: calc(50% - 37.5px);
+                bottom: 2.5px;
+                height: 35px;
+                width: 35px;
+                border-radius: 3px;
+                padding: 0px;
+                text-align: center;
+            }
+
+            .win:hover {
+                z-index: 3;
+                position: fixed;
+                left: calc(50% - 37.5px);
+                bottom: 2.5px;
+                height: 35px;
+                width: 35px;
+                background: white;
+                border-radius: 2.5px;
+                padding: 0px;
+                text-align: center;
+                animation: fadeIn 0.3s;
+            }
+
+            @keyframes fadeIn {
+                0% {background: transparent;}
+                100% {background: white;}
+            }
+
+            .StartMenu {
+                position: fixed;
+                z-index: 6;
+                left: calc(50% - 250px);
+                bottom: 50px;
+                text-align: center;
+                z-index: 1;
+                height: 500px;
+                width: 500px;
+                border-radius: 20px;
+                background: rgba(255,255,255,0.75);
+                display: none;
+                animation: move 0.25s;
+                text-shadow: none;
+                color: black;
+                line-height: default;
+
+            }
+
+            @keyframes move {
+                0% { bottom: -500px; background: transparent;}
+                100% { bottom: 50px; background: rgba(255,255,255,0.75);}
+            }
+
+            @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+                .StartMenu {
+                    -webkit-backdrop-filter: blur(10px);
+                    backdrop-filter: blur(10px);
+                }
+            }
+
+            .StartMenu2 {
+                position: fixed;
+                z-index: 6;
+                left: calc(50% - 250px);
+                bottom: 50px;
+                text-align: center;
+                z-index: 1;
+                height: 500px;
+                width: 500px;
+                border-radius: 20px;
+                background: rgba(255,255,255,0.75);
+                display: none;
+                animation: unmove 0.25s;
+                text-shadow: none;
+                color: black;
+                line-height: default;
+
+            }
+
+            @keyframes unmove {
+                0% { bottom: 50px; background: rgba(255,255,255,0.75);}
+                100% { bottom: -500px; background: transparent;}
+            }
+
+            @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+                .StartMenu2 {
+                    -webkit-backdrop-filter: blur(10px);
+                    backdrop-filter: blur(10px);
+                }
+            }
+
+            .taskbartime {
+                z-index: 4;
+                position: fixed;
+                right: 5px;
+                bottom: 5px;
+                font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif; 
+                font-size: 13px; 
+                font-style: normal; 
+                font-variant: normal; 
+                font-weight: 100; 
+                line-height: 15px;
+                text-shadow: none;
+                color: black;
+            }
+
+            .recyclebin {
+                position: fixed;
+                z-index: 4;
+                left: 10px;
+                top: 10px;
+                font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif; 
+                font-size: 13px; 
+                font-style: normal; 
+                font-variant: normal; 
+                font-weight: 100; 
+                text-align: center;
+                width: 48px;
+            }
+
+            .recyclebinwindow {
+                display: none;
+                position: fixed;
+                width: 500px;
+                height: 400px;
+                border-radius: 0px;
+                background: white;
+                z-index: 5;
+                left: calc(50% - 250px);
+                top: calc(50% - 200px);
+                color: black;
+                text-shadow: none;
+                padding: 0px;
+                font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif; 
+                font-size: 11px; 
+                font-style: normal; 
+                font-variant: normal; 
+                font-weight: 100;
+                box-shadow: 0px 0px 10px #888888;
+                cursor: url(cursors/still.png), pointer;
+            }
+
+            .recyclebintopbar {
+                color: black;
+            }
+
+            .recyclebinwindowtext {
+                margin-left: 5px;
+                top: -2.5px;
+                position: relative;
+            }
+
+            .recyclebinwindowicon {
+                margin-top: 3px;
+                margin-left: 3px;
+            }
+
+            .recyclebinwindowcloser {
+                top: 0px;
+                right: calc(-100% + 22px);
+                position: relative;
+                font-size: 15px;
+                height: 19px;
+                width: 22px;
+                padding-top: 3px;
+                text-align: center;
+                vertical-align: middle;
+            }
+
+            .recyclebinwindowcloser:hover {
+                top: 0px;
+                right: calc(-100% + 22px);
+                position: relative;
+                font-size: 15px;
+                height: 19px;
+                width: 22px;
+                text-align: center;
+                vertical-align: middle;
+                background: red;
+                padding-top: 3px;
+                color: white;
+                animation: redden 0.01s;
+            }
+
+            @keyframes redden {
+                0% { background: transparent; color:black;}
+                100% { background: red; color: white;}
+            }
+
+            #recyclebinwindowheader {
+                background: #f0f0f0;
+                width: 100%;
+                position: absolute;
+                margin-right: 0px;
+                border-radius: 10px 10px 0px 0px;
+                vertical-align: center;
+                cursor: url(cursors/still.png), pointer;
+            }
+
+            #recyclebinwindowheader:active {
+                cursor: url(cursors/still.png), pointer;
+            }
+            #recyclebinwindowheader:hover {
+                cursor: url(cursors/still.png), pointer;
+                border-width: 20px;
+            }
+
+            .explorerwindow {
+                display: none;
+                position: fixed;
+                width: 500px;
+                height: 400px;
+                border-radius: 0px;
+                background: white;
+                z-index: 5;
+                left: calc(50% - 250px);
+                top: calc(50% - 200px);
+                color: black;
+                text-shadow: none;
+                padding: 0px;
+                font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif; 
+                font-size: 11px; 
+                font-style: normal; 
+                font-variant: normal; 
+                font-weight: 100;
+                box-shadow: 0px 0px 10px #888888;
+                cursor: url(cursors/still.png), pointer;
+            }
+
+            .explorertopbar {
+                color: black;
+            }
+
+            .explorerwindowtext {
+                margin-left: 5px;
+                top: -2.5px;
+                position: relative;
+            }
+
+            .explorerwindowicon {
+                margin-top: 3px;
+                margin-left: 3px;
+            }
+
+            .explorerwindowcloser {
+                top: 0px;
+                right: calc(-100% + 22px);
+                position: relative;
+                font-size: 15px;
+                height: 19px;
+                width: 22px;
+                padding-top: 3px;
+                text-align: center;
+                vertical-align: middle;
+            }
+
+            .explorerwindowcloser:hover {
+                top: 0px;
+                right: calc(-100% + 22px);
+                position: relative;
+                font-size: 15px;
+                height: 19px;
+                width: 22px;
+                text-align: center;
+                vertical-align: middle;
+                background: red;
+                padding-top: 3px;
+                color: white;
+                animation: redden 0.01s;
+            }
+
+            #explorerwindowheader {
+                background: #f0f0f0;
+                width: 100%;
+                position: absolute;
+                margin-right: 0px;
+                border-radius: 10px 10px 0px 0px;
+                vertical-align: center;
+                cursor: url(cursors/still.png), pointer;
+            }
+
+            .about {
+                position: fixed;
+                z-index: 4;
+                left: 10px;
+                top: 110px;
+                font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif; 
+                font-size: 13px; 
+                font-style: normal; 
+                font-variant: normal; 
+                font-weight: 100; 
+                text-align: center;
+                width: 48px;
+            }
+
+            .edgewindow {
+                display: none;
+                position: fixed;
+                width: 500px;
+                height: 400px;
+                border-radius: 0px;
+                background: white;
+                z-index: 5;
+                left: calc(50% - 250px);
+                top: calc(50% - 200px);
+                color: black;
+                text-shadow: none;
+                padding: 0px;
+                font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif; 
+                font-size: 11px; 
+                font-style: normal; 
+                font-variant: normal; 
+                font-weight: 100;
+                box-shadow: 0px 0px 10px #888888;
+                cursor: url(cursors/still.png), pointer;
+            }
+
+            .edgetopbar {
+                color: black;
+            }
+
+            .edgewindowtext {
+                margin-left: 5px;
+                top: -2.5px;
+                position: relative;
+            }
+
+            .edgewindowicon {
+                margin-top: 3px;
+                margin-left: 3px;
+            }
+
+            .edgewindowcloser {
+                top: 0px;
+                right: calc(-100% + 22px);
+                position: relative;
+                font-size: 15px;
+                height: 19px;
+                width: 22px;
+                padding-top: 3px;
+                text-align: center;
+                vertical-align: middle;
+            }
+
+            .edgewindowcloser:hover {
+                top: 0px;
+                right: calc(-100% + 22px);
+                position: relative;
+                font-size: 15px;
+                height: 19px;
+                width: 22px;
+                text-align: center;
+                vertical-align: middle;
+                background: red;
+                padding-top: 3px;
+                color: white;
+                animation: redden 0.01s;
+            }
+
+            #edgewindowheader {
+                background: #f0f0f0;
+                width: 100%;
+                position: absolute;
+                margin-right: 0px;
+                vertical-align: center;
+                cursor: url(cursors/still.png), pointer;
+            }
+
+            .edgewindowbodytext {
+                position: absolute;
+                top: 25px;
+                left: 5px;
+                font-size: 14px;
+                color: black;
+                padding-right: 5px;
+            }
+
+            .footertext {
+                position: absolute;
+                font-size: 8px;
+                left: 5px;
+                bottom: 5px;
+            }
+        </style>
+    </head>
+    <body class="all" onload="loadWin(), setInterval('taskbarTime()', 10)">
+        <script>
+            function loadWin() {
+                var a = document.getElementById("bios");
+                var i = document.getElementById("prompt1");
+                setTimeout(function(){a.innerHTML += "<br>Type help for help.";}, 500);
+                setTimeout(function(){a.innerHTML += "<br><br><br><br><span id='c'>C:/><input id='prompt1' style='background:black;border:0px;font-family:biosfont;color:white;outline:none;font-size:24px;cursor:none;color:lightgray;' autofocus></span>";}, 1000);
+
+
+            }
+
+            document.addEventListener('keydown', function(event) {
+                if(event.keyCode == 13) {
+                    var a = document.getElementById("bios");
+                    var c = document.getElementById("c");
+                    var i = document.getElementById("prompt1");
+                    if(i.value === "help") {
+                        c.innerHTML = "C:/>" + i.value;
+                        a.innerHTML += "<br>Type [help] to show this again,<br>[win] to start Windows,<br>[viewdir] to see the files in your current directory,<br>[cd] to navigate";
+                        a.innerHTML += "<br><span id='c'>C:/><input id='prompt1' style='background:black;border:0px;font-family:biosfont;color:white;outline:none;font-size:24px;cursor:none;color:lightgray;' autofocus></span>";
+                    } 
+                    else if(i.value === "win") {
+                        a.innerHTML = "Starting Windows...";
+
+                        setTimeout(function(){a.innerHTML += "<br>&emsp;Warning: Checks need to be performed.";}, 250);
+
+                        setTimeout(function(){a.innerHTML += "<br><br>Performing checks...";}, 500);
+
+                        setTimeout(function(){a.innerHTML += "<br>Checking CPU...";}, 1000);
+                        setTimeout(function(){a.innerHTML += "done";}, 1500);
+
+                        setTimeout(function(){a.innerHTML += "<br>Checking RAM...";}, 2000);
+                        setTimeout(function(){a.innerHTML += "done";}, 2500);
+
+                        setTimeout(function(){a.innerHTML += "<br>Checking GPU...";}, 3000);
+                        setTimeout(function(){a.innerHTML += "done<br>&emsp;Unknown GPU, but no problems detected";}, 3500);
+
+                        setTimeout(function(){a.innerHTML += "<br>Checking Drivers...<span id='drvload' style='position:relative;z-index:11; display:inline;'>/</span>";}, 4000);
+
+                        setTimeout(function() { document.getElementById("drvload").innerHTML = "/";}, 4125);
+                        setTimeout(function() { document.getElementById("drvload").innerHTML = "-";}, 4250);
+                        setTimeout(function() { document.getElementById("drvload").innerHTML = "&bsol;";}, 4375);
+                        setTimeout(function() { document.getElementById("drvload").innerHTML = "|";}, 4500);
+                        setTimeout(function() { document.getElementById("drvload").innerHTML = "/";}, 4625);
+                        setTimeout(function() { document.getElementById("drvload").innerHTML = "-";}, 4750);
+                        setTimeout(function() { document.getElementById("drvload").innerHTML = "&bsol;";}, 4875);
+                        setTimeout(function() { document.getElementById("drvload").innerHTML = "|";}, 5000);
+                        setTimeout(function() { document.getElementById("drvload").innerHTML = "/";}, 5125);
+                        setTimeout(function() { document.getElementById("drvload").innerHTML = "-";}, 5250);
+                        setTimeout(function() { document.getElementById("drvload").innerHTML = "&bsol;";}, 5375);
+                        setTimeout(function() { document.getElementById("drvload").innerHTML = "|";}, 5500);
+                        setTimeout(function() { document.getElementById("drvload").innerHTML = "/";}, 5625);
+                        setTimeout(function() { document.getElementById("drvload").innerHTML = "-";}, 5750);
+                        setTimeout(function() { document.getElementById("drvload").innerHTML = "&bsol;";}, 5875);
+                        setTimeout(function() { document.getElementById("drvload").innerHTML = "|";}, 6000);
+                        setTimeout(function() { document.getElementById("drvload").innerHTML = "/";}, 6125);
+                        setTimeout(function() { document.getElementById("drvload").innerHTML = "-";}, 6250);
+                        setTimeout(function() { document.getElementById("drvload").innerHTML = "&bsol;";}, 6375);
+                        setTimeout(function() { document.getElementById("drvload").innerHTML = "done";}, 6500);
+
+                        setTimeout(function(){a.innerHTML += "<br>Checking Display...";}, 7000);
+                        setTimeout(function(){a.innerHTML += "done<br>&emsp;Display type: Generic PnP monitor<br>&emsp;Current resolution: " + screen.availWidth + " x " + screen.availHeight;}, 7500); //add hz to data
+
+                        setTimeout(function(){a.innerHTML += "<br><br>All checks complete. No problems were detected.";}, 8000);
+
+                        setTimeout(function(){a.innerHTML += "<br><br>Booting...";}, 8500);
+
+                        setTimeout(function(){a.innerHTML = " ";}, 9000);
+                        setTimeout(function(){a.innerHTML = "_";}, 9200);
+                        setTimeout(function(){a.innerHTML = " ";}, 9400);
+                        setTimeout(function(){a.innerHTML = "_";}, 9600);
+                        setTimeout(function(){a.innerHTML = " ";}, 9800);
+
+                        setTimeout(function(){a.style.textAlign = "center"; a.innerHTML = '<img src="images/bootlogo.png" style="position:fixed;top:20%;height:120px;width:120px;margin-left:-60px;"><div class="ring"><div class="dot one"><span></span></div><div class="dot two"><span></span></div><div class="dot three"><span></span></div><div class="dot four"><span></span></div><div class="dot five"><span></span></div><div class="dot six"><span></span></div><div class="dot seven"><span></span></div><div class="dot eight"><span></span></div><div class="dot nine"><span></span></div><div class="dot ten"><span></span></div><div class="dot eleven"><span></span></div><div class="dot twelve"><span></span></div><div class="dot thirteen"><span></span></div><div class="dot fourteen"><span></span></div><div class="dot fifteen"><span></span></div></div>';}, 10000);
+
+                        setTimeout(function(){a.style.display = "none";}, 15000);
+
+                    } else {
+                        if(i.value === "cd") {
+                            a.innerHTML += "<br><br>C:/><input id='prompt1' style='background:black;border:0px;font-family:biosfont;color:white;outline:none;font-size:24px;cursor:none;color:lightgray;' autofocus>";
+                        } 
+                        else if(i.value === "viewdir") {
+                            c.innerHTML = "C:/>" + i.value;
+                            a.innerHTML += "<br>Note: names in [] are folders and names in {} are archives.<br><br>Current directory: C:/, contents:<br><br>&emsp;[DRIVERS]<br>&emsp;[HTML-DOS]<br>&emsp;[Intel]<br>&emsp;[Program Files]<br>&emsp;[Program Files (x86)]<br>&emsp;[Users]<br>&emsp;[Windows]<br>&emsp;pagefile.sys<br><br>C:/><input id='prompt1' style='background:black;border:0px;font-family:biosfont;color:white;outline:none;font-size:24px;cursor:none;color:lightgray;' autofocus>";
+                        } else {
+                            if(i.value === "cd /drivers" || i.value === "cd /DRIVERS") {
+                                c.innerHTML = "C:/>" + i.value;
+                                a.innerHTML += "<br><br>Sorry, this folder is in use.<br><br><span id='c'>C:/><input id='prompt1' style='background:black;border:0px;font-family:biosfont;color:white;outline:none;font-size:24px;cursor:none;color:lightgray;' autofocus></span>";
+                            } else {}
+                        }
+                    }
+                }
+            });
+
+            function addZero() {
+                if(m < 10) {
+                    m = "0" + m;
+                }
+            }
+
+            function taskbarTime() {
+                var d = new Date();
+                var t = d.getTime();
+                var h = d.getHours();
+                var m = d.getMinutes();
+                var mm = d.getMonth() + 1;
+                var y = d.getYear() - 100;
+                var dd = d.getDate();
+                if(m < 10) {
+                    m = "0" + m;
+                } else {}
+                document.getElementById("taskBarTime").innerHTML = "<center>" + h + ":" + m + "<br>" + mm + "/" + dd + "/" + y + "</center>";
+            }
+
+            function startMenu() {
+                var x = document.getElementById("StartMenu");
+                var xx = document.getElementById("StartMenu2");
+                if (x.style.display === "none") {
+                    //x.style.animation = "move 0.25s";
+                    //x.style.animationDirection = "initial";
+                    xx.style.display = "none";
+                    x.style.display = "block";
+                } else {
+                    //add the element swiching
+                    x.style.display = "none";
+                    xx.style.display = "block";
+                    setTimeout(function(){xx.style.display = "none";}, 250);
+                }
+            }
+
+            function recycleBin() {
+                var r = document.getElementById("recyclebinwindow");
+                r.style.display = "flex";
+            }
+
+            function closeRB() {
+                document.getElementById("recyclebinwindow").style.display = "none";
+            }
+
+            function fileExplorer() {
+                var r = document.getElementById("explorerwindow");
+                r.style.display = "flex";
+            }
+
+            function closeFE() {
+                document.getElementById("explorerwindow").style.display = "none";
+            }
+
+            function aboutWin() {
+                var r = document.getElementById("edgewindow");
+                r.style.display = "flex";
+            }
+
+            function closeAW() {
+                document.getElementById("edgewindow").style.display = "none";
+            }
+        </script>
+
+        <div id="bios" class="bios">The HTML PC DOS v1.0.0000</div>
+
+        <div id="taskbar" class="taskbar"></div>
+        <div class="taskbaricons">
+            <div class="win" id="win"><img src="images/start.png" class="start" onclick="startMenu()"></div>
+            <div class="explorer"><img src="images/explorer.png" class="explorericon" onclick="fileExplorer()"></div>
+        </div>
+
+        <div id="explorerwindow" class="explorerwindow"><div class="explorerwindowheader" id="explorerwindowheader"><img src="images/explorerbigsq.png" width="15" height="15" class="explorerwindowicon"><span class="explorerwindowtext">Explorer</span></div><span class="explorerwindowcloser" onclick="closeFE()">&times;</span></div>
+
+        <div id="background" class="background"><img src="background/litebloom.png" class="backgroundimg"></div>
+
+        <div id="RecycleBin" class="recyclebin" width="48"><img src="images/emptyrecyclebin.png" width="48" height="48" ondblclick="recycleBin()"><br>Recycle Bin</div>
+
+        <div id="recyclebinwindow" class="recyclebinwindow"><div class="recyclebinwindowheader" id="recyclebinwindowheader"><img src="images/emptyrecyclebin.png" width="15" height="15" class="recyclebinwindowicon"><span class="recyclebinwindowtext">Recycle Bin</span></div><span class="recyclebinwindowcloser" onclick="closeRB()">&times;</span></div>
+
+        <div id="about" class="about"><img src="images/starticon.png" width="48" height="48" ondblclick="aboutWin()">About Windows 11</div>
+
+        <div id="edgewindow" class="edgewindow"><div class="edgewindowheader" id="edgewindowheader"><img src="images/starticon.png" width="15" height="15" class="edgewindowicon"><span class="edgewindowtext">About Windows 11</span></div><span class="edgewindowcloser" onclick="closeAW()">&times;</span><div class="edgewindowbodytext">This version of Windows 11 is written in HTML, JS, and CSS. You may notice it being a bit glitchy at times, but that is simply for it to run faster. This is a website, and it was based off of the actual Windows 11, in order to be as close to the actual OS as possible. Enjoy!</div><div class="footertext">Make sure to sub to IAMGLITCHED on Youtube.</div></div>
+
+        <div class="StartMenu" id="StartMenu">Start Menu<br></div>
+
+        <div class="StartMenu2" id="StartMenu2">Start Menu<br></div>
+
+        <div id="taskBarTime" class="taskbartime"><center>00:00<br>00/00/00</center></div>
+    </body>
+</html>
